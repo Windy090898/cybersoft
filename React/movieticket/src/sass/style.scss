@@ -1,0 +1,18 @@
+@import "./Seat";
+@import "./Table";
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main {
+  background-image: url(https://p.w3layouts.com/demos_new/template_demo/23-03-2018/movie_seat_selection-demo_Free/759053290/web/images/banner.jpg);
+  height: 100%;
+  background-position: center center;
+}
+
+.g-5, .gx-5 {
+    --bs-gutter-x: 6rem;
+}
