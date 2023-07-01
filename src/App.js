@@ -9,6 +9,7 @@ import Admin from "./Templates/Admin";
 import Dashboard from "./pages/Dashboard";
 import ItemDetail from "./pages/ItemDetail";
 import ProductList from "./pages/DemoForm/ProductList";
+import DemoLifecycle from "./pages/DemoLifecycle/DemoLifecycle";
 
 // import Layout from './CV/Layout';
 // import About from './CV/About';
@@ -22,20 +23,22 @@ export default function App() {
   
   return (
     <BrowserRouter>
-      <Routes>
+      {/* <Routes>
         <Route path="" element={<Home />}>
-          {/* <Route index element={<Carousel />} /> */}
           <Route path="login" element={<Login />} />
           <Route path="detail" element={<Detail />}>
             <Route path=":id" element={<ItemDetail />} />
           </Route>
           <Route path='form' element={<ProductList />} />
           <Route path="*" element={<Page404 />} />
-          {/* // trang 404  */}
         </Route>
         <Route path="/admin" element={<Admin />}>
-          {/* <Route index element={<DashBoard />}></Route> */}
         </Route>
+      </Routes> */}
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="lifecycle" element={<DemoLifecycle />} />
+          </Route>
       </Routes>
     </BrowserRouter>
   );
