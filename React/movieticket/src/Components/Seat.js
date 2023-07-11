@@ -1,55 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Form from "./Form";
 
-export default class Seat extends Component {
-  seatRange = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-  seatNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  arrSeat = () => {
-    const arrSeat =[]
-    for (let seat of this.seatRange) {
-      for (let number of this.seatNumber) {
-        arrSeat.push({
-          seat: seat + number,
-          status: 'empty'
-        })
-      }
-    }
-    return arrSeat
-  };
-  state = {
-    arrSeat: this.arrSeat(),
-  };
-
-  handleActive = (index) => {
-    let newArr = [...this.state.arrSeat];
-    if (newArr[index].status === 'empty') {
-      newArr[index].status = 'active';
-    } else if (newArr[index].status === 'active') {
-      newArr[index].status = 'empty';
-    } else {
-      alert('This seat is already occupied')
-    }
-    this.setState({
-          arrSeat: newArr
-        });
-  };
-
-  renderSeat = () => {
-    return this.state.arrSeat.map((item, index) => {
-      return (
-        <div
-          className="col-1"
-          key={item.seat}
-          onClick={() => {
-            this.handleActive(index);
-          }}
-        >
-          <div className={`p1 seatItem ${item.status}`}>{item.seat}</div>
-        </div>
-      );
-    });
-  };
-
+class Seat extends Component {
   render() {
     return (
       <div className="text-center text-white seatContainer">
@@ -59,7 +12,23 @@ export default class Seat extends Component {
         </div>
         <div className="seat">
           <div className="container overflow-hidden">
-            <div className="row gx-4 gy-3">{this.renderSeat()}</div>
+            <div className="row gx-4 gy-3">
+              {this.props.arrSeat.map((item, index) => {
+                return (
+                  <div
+                    className="col-1"
+                    key={item.seat}
+                    onClick={() => {
+                      this.props.toggleActiveSeat(index);
+                    }}
+                  >
+                    <div className={`p1 seatItem ${item.status}`}>
+                      {item.seat}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
         <div className="status container mt-3">
@@ -78,8 +47,19 @@ export default class Seat extends Component {
             </div>
           </div>
         </div>
-        <Form arrActive={this.state.arrSeat.filter(item => item.status === 'active')} />
+        <Form />
       </div>
     );
   }
 }
+
+const mapsStateToProps = (state) => ({
+  arrSeat: state.seat.arrSeat,
+});
+
+const mapsDispatchToProps = (dispatch) => ({
+  toggleActiveSeat: (index) =>
+    dispatch({ type: "TOGGLE_ACTIVE_SEAT", payload: index }),
+});
+
+export default connect(mapsStateToProps, mapsDispatchToProps)(Seat);

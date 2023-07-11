@@ -38,12 +38,22 @@
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
+.seatContainer .formContainer .form-control:disabled {
+  background-color: #898989;
+}
 
 .tableTicket {
   width: 60%;
   text-align: center;
   margin: 0 auto;
   margin-top: 20px;
+}
+.tableTicket .cancel-btn {
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 4px;
 }
 
 * {
